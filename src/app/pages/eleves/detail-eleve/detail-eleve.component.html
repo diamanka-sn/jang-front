@@ -1,0 +1,159 @@
+<div class="container mt-5">
+    <div class="container-fluid p-0">
+        <!-- <h1 class="h3 mb-3"></h1> -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="mb-0 text-success font-weight-bold">Parcours</h5>
+                        <hr>
+                        <table  class="row-border w-100 table text-center">
+                            <thead class="bg-success text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Annee</th>
+                                    <th>Classe</th>
+
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="parcours?.length !=0">
+                                <tr *ngFor="let v of parcours;let i=index ">
+                                    <td>{{i+1}}</td>
+                                    <td>{{v.annee}}</td>
+                                    <td>{{v.nomClasse}}</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                        <div *ngIf="parcours?.length <1">
+                            <h6 class="text-danger mb-0 lowercase">Pas de classe</h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+
+                    <div class="card-header">
+                        <i class="fas fa-spinner fa-pulse" *ngIf="isLoading"></i>
+                        <h5 class="card-title center mb-0">{{eleves.prenom}} {{eleves.nom}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm mt-2 mb-4">
+                            <tbody>
+                                <tr>
+                                    <th>Parent</th>
+                                    <td>{{eleves.ParentEleve.prenom}} {{eleves.ParentEleve.nom}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td class="text-lowercase">{{eleves.ParentEleve.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tél</th>
+                                    <td class="text-lowercase">{{eleves.ParentEleve.telephone}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mb-0 text-success font-weight-bold">Historique</h5>
+                    <hr>
+                    <i class="fas fa-spinner fa-pulse" *ngIf="isHistory"></i>
+                    <div *ngIf="historique?.length !=0">
+                        <div class="row" *ngFor="let p of historique; let i=index">
+                            <div class="col-md-3">
+                                <img src="../../../../assets/img/payes.png" height="70" width="70" />
+                            </div>
+                            <div class="col-md-9 te" style="">
+                                <div>
+                                    <strong>{{p.libelle}} <span class="float-right">{{p.date |
+                                            date:'dd/MM/yyyy'}}</span></strong>
+                                    <div>
+                                        {{p.cout}} FCFA 
+                                            <span class="float-right" *ngIf="p.mois==1">Janvier</span>
+                                            <span class="float-right" *ngIf="p.mois==2">Fevrier</span>
+                                            <span class="float-right" *ngIf="p.mois==3">Mars</span>
+                                            <span class="float-right" *ngIf="p.mois==4">Avril</span>
+                                            <span class="float-right" *ngIf="p.mois==5">Mai</span>
+                                            <span class="float-right" *ngIf="p.mois==6">Juin</span>
+                                            <span class="float-right" *ngIf="p.mois==7">Juillet</span>
+                                            <span class="float-right" *ngIf="p.mois==8">Aout</span>
+                                            <span class="float-right" *ngIf="p.mois==9">Septembre</span>
+                                            <span class="float-right" *ngIf="p.mois==10">Octobre</span>
+                                            <span class="float-right" *ngIf="p.mois==11">Novembre</span>
+                                            <span class="float-right" *ngIf="p.mois==12">Décembe</span>
+                                    </div>
+                                    <strong>
+
+                                    </strong>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="historique?.length <1">
+                        <h6 class="text-success mb-0 lowercase">Aucun paiement effectué</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="mb-0 text-success font-weight-bold">paiement</h5>
+                    <hr>
+                    <form class="mp"  [formGroup]="formG" (ngSubmit)="modifier()">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="floatingInput" class="ml-2">Service</label>
+                                <select class="form-control" name="service" id="service" formControlName="service">
+                                    <option value="">---------selectionner-----------</option>
+                                    <option value="{{forme.id}}" *ngFor="let forme of services">
+                                        {{forme.libelle}}
+                                    </option>
+
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="floatingPasswordc" class="ml-2">Mois</label>
+                                <select class="form-control" name="mois" formControlName="mois">
+                                    <option value="">---------selectionner-----------</option>
+                                    <option value="1">Janvier</option>
+                                    <option value="2">Fevrier</option>
+                                    <option value="3">Mars</option>
+                                    <option value="4">Avril</option>
+                                    <option value="5">Mai</option>
+                                    <option value="6">Juin</option>
+                                    <option value="7">Juillet</option>
+                                    <option value="8">Aout</option>
+                                    <option value="9">Septembre</option>
+                                    <option value="10">Octobre</option>
+                                    <option value="11">Novembre</option>
+                                    <option value="12">Décembre</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success btn-lg form-control"  [disabled]="formG.invalid">
+                                Enregistrer
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

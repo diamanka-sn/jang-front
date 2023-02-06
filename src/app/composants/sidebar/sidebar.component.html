@@ -1,0 +1,53 @@
+<div id="sideBar"
+    class="scrollarea relative flex flex-col flex-wrap border-r border-gray-300 p-6 flex-none w-64 md:-ml-64 md:fixed md:top-0 md:z-30 md:h-screen md:shadow-xl animated faster"
+    style="top: 80px; background:#198754;color:white;position: fixed;bottom: 0px;overflow-y: auto;">
+    <div class="scrollarea flex flex-col">
+
+        <div class="text-right hidden md:block mb-4">
+            <button id="sideBarHideBtn">
+                <i class="fad fa-times-circle"></i>
+            </button>
+        </div>
+
+        <p class="uppercase text-xs text-white-600 mb-4 tracking-wider">Accueil</p>
+        <a routerLinkActive="router-link-active" routerLink="/espace"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fa fa-dashboard text-xs mr-2"></i> Accueil
+        </a>
+        <a routerLinkActive="router-link-active" routerLink="service"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-books text-xs mr-2"></i> Services
+        </a>
+        <p class="uppercase text-xs text-white-600 mb-4 tracking-wider">Finance</p>
+
+        <a routerLinkActive="router-link-active" routerLink="depense"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fas fa-balance-scale text-xs mr-2"></i>Dépenses
+        </a>
+        <p class="uppercase text-xs text-white-600 mb-4 tracking-wider">Gestion</p>
+
+        <!-- link -->
+        <a routerLinkActive="router-link-actve" routerLink="eleve"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-users text-xs mr-2"></i> éleves
+        </a>
+        <a routerLinkActive="router-link-actve" routerLink="parent"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-users text-xs mr-2"></i> Parents
+        </a>
+        <p class="uppercase text-xs text-white-600 mb-4 tracking-wider">Information</p>
+
+        <!-- link -->
+        <a routerLinkActive="router-link-actve" routerLink="compte"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-users text-xs mr-2"></i> Compte
+        </a>
+        <a routerLinkActive="router-link-actve"  (click)="deconnexion()"
+            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fa fa-sign-out-alt text-xs mr-2"></i>Deconnexion
+        </a>
+      
+    </div>
+    <!-- end sidebar content -->
+
+</div>

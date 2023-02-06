@@ -1,0 +1,64 @@
+<div class="container mt-5" style="justify-content: center;">
+    <h2 class="text-center">Mon compte</h2>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Information personnelles <span class="pull-right"><button class="btn btn-"
+                                (click)="modifier()"><i class="fa fa-edit"></i></button></span></h6>
+                </div>
+                <div class="card-body">
+                    <div><strong>{{utilisateur.nom}}</strong></div>
+                    <div><small>{{utilisateur.email}}</small></div>
+                    <div><small>{{utilisateur.adresse}}</small></div>
+                    <div><small>{{utilisateur.telephone}}</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Modifier mot de passe </h6>
+                </div>
+                <div class="card-body">
+                    <form class="mp" [formGroup]="formG" (ngSubmit)="modifier()">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="floatingInput" class="ml-2">Mot de passe actuel</label>
+                                <input type="password" class="form-control" [ngClass]="erreurPassword ?'is-invalid':''"
+                                    id="floatingInput" placeholder="entrez votre mot de passe actuel"
+                                    formControlName="ancien">
+                                <div *ngIf="erreurPassword" class="text-danger">
+                                    le mot de passe est incorrect
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="floatingPassword" class="ml-2">Nouveau mot de passe</label>
+                                <input type="password" class="form-control" id="floatingPassword"
+                                    placeholder="entrez votre nouveau mot de passe" formControlName="nouveau">
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="floatingPasswordc" class="ml-2">Confirmer de nouveau le mot de passe</label>
+                                <input type="password" class="form-control" id="floatingPasswordc"
+                                    placeholder="saisissez de nouveau le mot de passe" formControlName="confirmer">
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success btn-lg form-control"
+                                [disabled]="formG.invalid">
+                                Enregistrer
+                            </button>
+                        </div>
+                        <div *ngIf="i==1" class="alert alert-success alert-dismissible fade show" role="alert">
+                            Mot de passe modifier avec succees
+                            <button type="button" class="btn-close float-right" data-bs-dismiss="alert"
+                                aria-label="Close">X</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

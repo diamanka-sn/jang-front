@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <div class="container-fluid p-0">
+        <!-- <h1 class="h3 mb-3"></h1> -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <h5 class="mb-0 text-success font-weight-bold">Liste enfant</h5>
+                        <hr>
+                        <table  class="row-border w-100 table text-center">
+                            <thead class="bg-success text-white">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Nom complet</th>
+                                    <th>sexe</th>
+                                    <th>Classe</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="eleves?.length !=0">
+                                <tr *ngFor="let v of eleves;let i=index ">
+                                    <td>{{i+1}}</td>
+                                    <td>{{v.code}}</td>
+                                    <td>{{v.prenom}} {{v.nom}}</td>
+                                    <td *ngIf="v?.sexe">M</td>
+                                    <td *ngIf="v?.sexe == false">F</td>
+                                    <td>{{v.nomClasse}}</td>   
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                        <div *ngIf="eleves.length <1">
+                            <h6 class="text-danger mb-0 lowercase">Pas d'enfants</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title center mb-0"> {{parents.prenom}} {{parents.nom}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm mt-2 mb-4">
+                            <tbody>
+                                <tr>
+                                    <th>Tél</th>
+                                    <td>{{parents.telephone}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td class="text-lowercase">{{parents.email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>

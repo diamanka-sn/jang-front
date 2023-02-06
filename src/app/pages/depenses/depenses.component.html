@@ -1,0 +1,116 @@
+<div class="mt-5 mr-3">
+    <div *ngIf="errorModif==false" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{modif.msg}}
+        <button type="button" class="btn-close float-right" data-bs-dismiss="alert"
+            aria-label="Close">X</button>
+    </div>
+    <div class="card w-100" style="">
+        <div class="card-header">
+            Liste dépense
+            <a href="#" (click)="afficherButtonSave()" class="btn btn-success" style="position: absolute;right: 30px;" data-bs-toggle="modal"
+                data-bs-target="#exampleModal"><i class="fa fa-plus mr-2"></i>Ajouter</a>
+
+        </div>
+        <div class="card-body table-responsive w-100">
+            <div class="mb-4">
+                <div class="row mt-4 mb-4">
+                    <div class="align-items-center col-md-4 col-sm-12 pull-left">
+                        <div class="row g-3 ">
+                            <div class="col-auto">
+                                <label for="afficherElement" class="col-form-label">Afficher</label>
+                            </div>
+                            <div class="col-auto">
+                                <select (change)="changerTaille($event)" class="form-select" id="afficherElement">
+                                    <option *ngFor="let size of tailles" value="size">
+                                        {{ size }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <span id="passwordHelpInline" class="form-text">
+                                    Elements
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 pull-right mr-3 col-sm-12" style="position: absolute;right:0px">
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <label for="recherche">Rechercher</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" id="recherche" name="recherche" class="form-control"
+                                    (input)="changer()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="row-border w-100 table table-striped text-center table-collapse table-hover">
+                <thead class="" style="background:#198754;color: white;">
+                    <tr>
+                        <th>#</th>
+                        <th>Libelle</th>
+                        <th>Montant (F cfa)</th>
+                        <th>Date</th>
+
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="depenses?.length !=0">
+                    <tr *ngFor="let m of depenses;let i=index ">
+                        <td>{{ i+1 }}</td>
+                        <td class="text-lowercase">{{m.libelle}}</td>
+                        <td>{{m.montant}}</td>
+                        <td>{{m.createdAt | date:'dd/MM/yyyy'}}</td>
+                        <td>
+                            <button (click)="modifier(m)" class="btn btn-primary ml-1"><i class="fa fa-edit"></i></button>
+                            <button (click)="supprimer(m.id)" class="btn btn-danger ml-1"><i class="fa fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <div *ngIf="depenses?.length < 1" class="text-center">
+                    P<span class="text-lowercase">as de dépenses</span>
+                </div>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered w-100">
+        <div class="modal-content">
+            <div class="modal-header " style="background: #198754;color: white;">
+                <h5 *ngIf="isModify == false" class="modal-title" id="exampleModalLabel">Ajouter une dépense</h5>
+                <h5 *ngIf="isModify" class="modal-title" id="exampleModalLabel">Modifier une dépense</h5>
+                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="">
+                        <form [formGroup]="formGroup" (ngSubmit)="submit()">
+                            <div class="row mb-3">
+                                <div class="form-group col-md-6">
+                                    <label>Libelle</label>
+                                    <input type="text" class="form-control" maxlength="" formControlName="libelle"
+                                        name="libelle" placeholder="Entrer le libelle">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Montant</label>
+                                    <input type="number" class="form-control" maxlength="" formControlName="montant" 
+                                        name="montant" placeholder="Entrer le montant">  
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <button *ngIf="isModify == false" type="button" type="submit"
+                                    class="btn btn-primary" [disabled]="formGroup.invalid">Ajouter</button>
+                                <button *ngIf="isModify" type="button" type="submit"
+                                    class="btn btn-primary" [disabled]="formGroup.invalid">Modifier</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
